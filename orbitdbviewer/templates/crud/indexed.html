@@ -1,0 +1,46 @@
+<form action="/dbput" method="POST">
+    <div class="row">
+        <div class="col">
+            {{ dbput.key.label }}
+            <div class="input-group mb-3">
+                {{ dbput.key }}
+            </div>
+        </div>
+        <div class="col">
+            {{ dbput.value.label }}
+            <div class="input-group mb-3">
+                {{ dbput.value }}
+            </div>
+        </div>
+     </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in dball %}
+        <tr>
+            <td>{{ item[db.index_by] }}</td>
+            <td>{{ item }}</td>
+
+            <td><button class="btn btn-primary" onclick="$('#key').val('{{ item[db.index_by] | tojson|safe }}');$('#value').val('{{ item | tojson|safe }}');">Edit</button></td>
+            {% if db.removeable %}
+                <td><form action="/dbrm/{{ item[db.index_by] }}" method="POST"><button type="submit" class="btn btn-primary">Delete</button></form></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+

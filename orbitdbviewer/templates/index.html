@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_field %}
+{% from 'flash.html' import flash %}
+{% block title %}OrbitDB Viewer{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .container {
+      max-width: 500px;
+      padding-top: 100px;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+    {% include 'flash.html' %}
+
+    <div class="container">
+        <form method="POST">
+            {{ form.csrf_token }}
+            <div class="row">
+                {{ form.orbitdb_host.label }}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        {% for item in form.orbitdb_addr_prot %}
+                        <div class="input-group-text">
+                                {{ render_field(item) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {{ form.orbitdb_host }}
+                </div>
+            </div>
+            <div class="row">
+                {{ form.orbitdb_port.label }}
+                <div class="input-group mb-3">
+                    {{ form.orbitdb_port }}
+                </div>
+            </div>
+            <div class="row">
+                {{ form.ipfs_host.label }}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        {% for item in form.ipfs_addr_prot %}
+                            <div class="input-group-text">
+                                {{ render_field(item) }}
+                            </div>
+                            {% endfor %}
+                    </div>
+                    {{ form.ipfs_host }}
+                </div>
+            </div>
+            <div class="row">
+                {{ form.ipfs_port.label }}
+                <div class="input-group mb-3">
+                    {{ form.ipfs_port }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Go</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
