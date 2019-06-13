@@ -4,7 +4,7 @@ import json
 import logging
 from functools import wraps
 from orbitdbviewer import forms
-from orbitdbapi.client import OrbitDbAPI as OrbitDBClient
+from orbitdbapi import OrbitDbAPI as OrbitDBClient
 from ipfsapi.client import Client as IPFSClient
 
 #from flask_wtf.csrf import CSRFProtect
@@ -68,7 +68,7 @@ def database():
         except:
             flash('Error connecting to OrbitDB API')
             logging.exception('Failed to connect to OrbitDB API')
-            del session['orbitdb_addr']
+            del session['database_addr']
             return redirect(url_for('index'))
     else:
         flash_errors(dbopen)
