@@ -1,21 +1,23 @@
 <form action="/dbput" method="POST">
-    <div class="row">
-        <div class="col">
-            {{ dbput.key.label }}
-            <div class="input-group mb-3">
-                {{ dbput.key }}
+    <fieldset {% if not db.can_append %}disabled="disabled"{% endif %}>
+        <div class="row">
+            <div class="col">
+                {{ dbput.key.label }}
+                <div class="input-group mb-3">
+                    {{ dbput.key }}
+                </div>
+            </div>
+            <div class="col">
+                {{ dbput.value.label }}
+                <div class="input-group mb-3">
+                    {{ dbput.value }}
+                </div>
             </div>
         </div>
-        <div class="col">
-            {{ dbput.value.label }}
-            <div class="input-group mb-3">
-                {{ dbput.value }}
-            </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
-     </div>
-    <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+    </fieldset>
 </form>
 <br>
 <table class="table">

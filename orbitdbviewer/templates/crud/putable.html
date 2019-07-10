@@ -1,21 +1,23 @@
 <form action="/dbput" method="POST">
-    <div class="row">
-        <div class="col">
-            {{ dbput.key.label }}
-            <div class="input-group mb-3">
-                {{ dbput.key }}
+    <fieldset {% if not db.can_append %}disabled="disabled"{% endif %}>
+        <div class="row">
+            <div class="col">
+                {{ dbput.key.label }}
+                <div class="input-group mb-3">
+                    {{ dbput.key }}
+                </div>
+            </div>
+            <div class="col">
+                {{ dbput.value.label }}
+                <div class="input-group mb-3">
+                    {{ dbput.value }}
+                </div>
             </div>
         </div>
-        <div class="col">
-            {{ dbput.value.label }}
-            <div class="input-group mb-3">
-                {{ dbput.value }}
-            </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
-     </div>
-    <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+    </fieldset>
 </form>
 <br>
 <table class="table">
@@ -34,7 +36,7 @@
             <td>{{ tkey }}</td>
             <td>{{ tvalue }}</td>
             <td><button class="btn btn-primary" onclick="$('#key').val('{{tkey|tojson|safe}}');$('#value').val('{{tvalue|tojson|safe}}');">Edit</button></td>
-            {% if db.removeable %}
+            {% if db.can_append and db.removeable %}
                 <td><form action="/dbrm/{{tkey}}" method="POST"><button type="submit" class="btn btn-primary">Delete</button></form></td>
             {% endif %}
         </tr>

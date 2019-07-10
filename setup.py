@@ -14,7 +14,7 @@ setup(
     packages=find_packages(),
     package_data={'orbitdbviewer': ['templates/*']},
     install_requires=[
-        'orbitdbapi >= 0.2.1-dev0',
+        'orbitdbapi >= 0.3.0-dev0',
         'ipfsapi ~= 0.4.3',
         'flask ~= 1.0.2',
         'flask_wtf ~= 0.14.2',
